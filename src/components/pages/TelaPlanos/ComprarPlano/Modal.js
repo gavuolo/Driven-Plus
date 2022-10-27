@@ -19,10 +19,10 @@ export default function CompModal({modalIsOpen, setIsOpen}){
                 overlayClassName="modal-overlay"
                 className="modal"
             >
-                 <Fechar onClick={fecharModal}>x</Fechar>
                 <p>Tem certeza que deseja assinar o plano Driven Plus (R$ 39,99)?</p>
                 <Escolha onClick={fecharModal}>SIM</Escolha>
                 <Escolha onClick={fecharModal}>NÃO</Escolha>
+                <Fechar onClick={fecharModal}>x</Fechar>
                
             </Modal>
         </>

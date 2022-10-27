@@ -7,7 +7,8 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function TelaLogin({ icon }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { user, setUser } = useContext(AuthContext)
+
+    const { user, setUser, token, setToken, addToken } = useContext(AuthContext)
     const navigate = useNavigate()
 
     function Logar() {
@@ -15,18 +16,17 @@ export default function TelaLogin({ icon }) {
             email: email,
             password: password
         }
-        console.log(body)
         const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/login'
         const post = axios.post(URL, body)
         post.then((ress) => {
-            
             //localStorage
-            let info = JSON.parse(localStorage.getItem('user'))
-            console.log(info, ress.data)
-            localStorage.setItem('user', JSON.stringify(ress.data))
+            //setToken(ress.data.token)
+            //let info = JSON.parse(localStorage.getItem('userToken1'))
+            //localStorage.setItem('userToken', JSON.stringify(ress.data))
+            addToken(ress.data.token)
 
             setUser(ress.data)
-            if (ress.data.membership === null && info.membership == null ) {
+            if (ress.data.membership === null) {
                 navigate('/subscriptions')
             } else {
                 navigate('/home')

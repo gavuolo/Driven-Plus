@@ -28,7 +28,7 @@ export default function App(){
                     <Route path="/" element={<TelaLogin icon={icon}/>}/>
                     <Route path="/sign-up" element={<TelaCadastro icon={icon}/>}/>
                     <Route path="/subscriptions" element={<EscolhaPlano img={img}/>}/>
-                    <Route path="/subscriptions/ID_DO_PLANO" element={<ComprarPlano img={img} money={money} calendar={calendar}/>}/>
+                    <Route path="/subscriptions/:idPlano" element={<ComprarPlano img={img} money={money} calendar={calendar}/>}/>
                     <Route path="/home" element={<TelaHome img={img}/>}/>
                 </Routes>
             </AuthProvider>
