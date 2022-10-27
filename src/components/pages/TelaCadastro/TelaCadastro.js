@@ -1,7 +1,33 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { IMaskInput } from "react-imask";
+import axios from "axios";
 
 export default function TelaCadastro({ icon }) {
+
+    const [form, setForm] = useState({ email: "", name: "", cpf: "", password: "" })
+    const navigate = useNavigate("/")
+
+    //POST do formulário 
+    function Cadastrar() {
+        const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up'
+        const post = axios.post(URL, form)
+        post.then(() => {
+            alert("Sucesso! Usuário cadastrado")
+            navigate('/')
+        })
+        post.catch((ress) => {
+            alert(ress.response.data.message)
+        })
+    }
+
+    //Formulário para enviar
+    function Formulario(e) {
+        const { name, value } = e.target
+        setForm({ ...form, [name]: value })
+    }
+
     return (
         <>
             <Icon>
@@ -9,27 +35,37 @@ export default function TelaCadastro({ icon }) {
             </Icon>
             <InputLogin>
                 <input
+                    name="name"
                     type="text"
                     placeholder="Nome"
+                    value={form.name}
+                    onChange={Formulario}
                 />
-                <input
-                    type="text"
+                <IMaskInput
+                    mask="000.000.000-00"
                     placeholder="CPF"
-                />
+                    name="cpf"
+                    value={form.cpf}
+                    onChange={Formulario}
+                />               
                 <input
+                    name="email"
                     type="text"
                     placeholder="E-mail"
+                    value={form.email}
+                    onChange={Formulario}
                 />
                 <input
+                    name="password"
                     type="text"
                     placeholder="Senha"
+                    value={form.password}
+                    onChange={Formulario}
                 />
             </InputLogin>
-
             <DivButton>
-                <button> CADASTRAR </button>
+                <button onClick={Cadastrar}> CADASTRAR </button>
             </DivButton>
-
             <Link to="/">
                 <Text>
                     <p>Já possuí uma conta? Entre</p>
