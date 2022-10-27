@@ -16,15 +16,12 @@ export default function TelaLogin({ icon }) {
             email: email,
             password: password
         }
+
         const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/login'
         const post = axios.post(URL, body)
+        
         post.then((ress) => {
-            //localStorage
-            //setToken(ress.data.token)
-            //let info = JSON.parse(localStorage.getItem('userToken1'))
-            //localStorage.setItem('userToken', JSON.stringify(ress.data))
             addToken(ress.data.token)
-
             setUser(ress.data)
             if (ress.data.membership === null) {
                 navigate('/subscriptions')

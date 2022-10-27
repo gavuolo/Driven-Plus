@@ -2,12 +2,11 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Plano({ planos }) {
-    console.log(planos)
     return (
         <>
-        {planos.map((a) =>
-        <Link to={`/subscriptions/${a.id}`}>
-            <BoxPlano key={a.id}>
+        {planos.map((a, index) =>
+        <Link to={`/subscriptions/${a.id}`} key={index}>
+            <BoxPlano>
             <IconImg>
                 <img src={a.image} alt="img" />
             </IconImg>

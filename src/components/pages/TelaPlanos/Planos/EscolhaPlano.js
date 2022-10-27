@@ -18,13 +18,15 @@ export default function EscolhaPlano({ img }) {
         })
         get.catch((err) => console.log(err.response.data.message))
     }, [])
+
+
     return (
         <Global>
             <TopBar>
                 <p>Escolha seu Plano</p>
             </TopBar>
 
-            <Plano 
+            <Plano
             planos={planos}
             />
 
@@ -45,32 +47,3 @@ const TopBar = styled.div`
     font-size: 32px;
     line-height: 38px;
 `
-
-/*<Link to="/subscriptions/ID_DO_PLANO">
-                <BoxPlano>
-                    <IconImg>
-                        <img src={img} alt="img" />
-                    </IconImg>
-                    <Preco>
-                        <p>R$ 39,99</p>
-                    </Preco>
-                </BoxPlano>
-            </Link>
-
-            <BoxPlano>
-                <IconImg>
-                    <img src={img} alt="img" />
-                </IconImg>
-                <Preco>
-                    <p>R$ 39,99</p>
-                </Preco>
-            </BoxPlano>
-
-            <BoxPlano>
-                <IconImg>
-                    <img src={img} alt="img" />
-                </IconImg>
-                <Preco>
-                    <p>R$ 39,99</p>
-                </Preco>
-            </BoxPlano> */
