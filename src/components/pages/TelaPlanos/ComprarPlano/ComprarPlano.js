@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import ReactDOM from 'react-dom';
-import CompModal from "./Modal";
 import axios from "axios";
 import Form from "./Form";
 import InfoPLano from "./InfoPlano";
@@ -49,17 +48,11 @@ export default function ComprarPlano({ img, calendar, money , form}) {
            />
 
             <Form 
-            
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
             info={info}
             abrirModal={abrirModal}
             />
-
-            <CompModal
-            form={form}
-            modalIsOpen={modalIsOpen}
-            setIsOpen={setIsOpen}
-            >
-            </CompModal>
 
         </Global>
     )
