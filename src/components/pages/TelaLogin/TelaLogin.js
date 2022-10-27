@@ -1,7 +1,46 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function TelaLogin({ icon }) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { user, setUser } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    function Logar() {
+        const body = {
+            email: email,
+            password: password
+        }
+        console.log(body)
+        const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/login'
+        const post = axios.post(URL, body)
+        post.then((ress) => {
+            
+            //localStorage
+            let info = JSON.parse(localStorage.getItem('user'))
+            console.log(info, ress.data)
+            localStorage.setItem('user', JSON.stringify(ress.data))
+
+            setUser(ress.data)
+            if (ress.data.membership === null && info.membership == null ) {
+                navigate('/subscriptions')
+            } else {
+                navigate('/home')
+            }
+        })
+        post.catch((err) => {
+            if (err.response.status == 422) {
+                alert("Usuário não existente. Por favor, faça o cadastro.")
+            } else {
+                alert(err.response.data.message)
+            }
+            window.location.reload();
+        })
+    }
     return (
         <>
             <Icon>
@@ -9,19 +48,25 @@ export default function TelaLogin({ icon }) {
             </Icon>
             <InputLogin>
                 <input
+                    name="email"
                     type="text"
                     placeholder="E-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
+                    name="password"
                     type="text"
                     placeholder="Senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             </InputLogin>
-            <Link to="/subscriptions">
+
             <DivButton>
-                <button> ENTRAR </button>
+                <button onClick={Logar}> ENTRAR </button>
             </DivButton>
-            </Link>
+
 
             <Link to="/sign-up">
                 <Text>

@@ -40,6 +40,7 @@ export default function TelaCadastro({ icon }) {
                     placeholder="Nome"
                     value={form.name}
                     onChange={Formulario}
+                    required
                 />
                 <IMaskInput
                     mask="000.000.000-00"
@@ -47,6 +48,7 @@ export default function TelaCadastro({ icon }) {
                     name="cpf"
                     value={form.cpf}
                     onChange={Formulario}
+                    required
                 />               
                 <input
                     name="email"
@@ -54,6 +56,7 @@ export default function TelaCadastro({ icon }) {
                     placeholder="E-mail"
                     value={form.email}
                     onChange={Formulario}
+                    required
                 />
                 <input
                     name="password"
@@ -61,6 +64,7 @@ export default function TelaCadastro({ icon }) {
                     placeholder="Senha"
                     value={form.password}
                     onChange={Formulario}
+                    required
                 />
             </InputLogin>
             <DivButton>
