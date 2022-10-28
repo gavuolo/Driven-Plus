@@ -8,7 +8,7 @@ import Plano from "./Plano"
 
 export default function EscolhaPlano({ img }) {
     const { user, setUser, token, setToken } = useContext(AuthContext)
-    const [planos, setPlanos] = useState([{}])
+    const [planos, setPlanos] = useState(undefined)
     const header = { headers: { Authorization: `Bearer ${token}` } }
     useEffect(() => {
         const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships'
@@ -25,11 +25,13 @@ export default function EscolhaPlano({ img }) {
             <TopBar>
                 <p>Escolha seu Plano</p>
             </TopBar>
-
-            <Plano
-            planos={planos}
-            />
-
+            {planos === undefined ?
+            <Carregando>Carregando...</Carregando>
+            :
+                <Plano
+                    planos={planos}
+                />
+            }
         </Global>
     )
 }
@@ -46,4 +48,12 @@ const TopBar = styled.div`
     font-weight: 700;
     font-size: 32px;
     line-height: 38px;
+`
+const Carregando = styled.div`
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 40px;
 `

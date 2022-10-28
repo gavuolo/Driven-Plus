@@ -100,8 +100,8 @@ export default function Form({ abrirModal, info, modalIsOpen, setIsOpen }) {
                 className="modal"
             >
                 <p>Tem certeza que deseja assinar o plano Driven Plus (R$ 39,99)?</p>
-                <Escolha type="submit" onClick={Enviar}>SIM</Escolha>
-                <Escolha onClick={fecharModal}>NÃO</Escolha>
+                <Nao onClick={fecharModal}>NÃO</Nao>
+                <Sim type="submit" onClick={Enviar}>SIM</Sim>
                 <Fechar onClick={fecharModal}>x</Fechar>
                
         </Modal>
@@ -149,8 +149,6 @@ const Assinar = styled.div`
     }
 `
 
-
-
 const Fechar = styled.button`
     text-align: center;
     font-size: 20px;
@@ -169,7 +167,18 @@ const Fechar = styled.button`
     margin: 20px;
     border-radius: 5px;
 `
-const Escolha = styled.button`
+const Nao = styled.button`
+    margin: 5%;
+    width: 95px;
+    height: 52px;
+    color: #FFFFFF;
+    border: none;
+    background-color: #CECECE;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+`
+const Sim = styled.button`
     margin: 5%;
     width: 95px;
     height: 52px;
