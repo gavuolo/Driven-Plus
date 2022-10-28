@@ -53,7 +53,7 @@ export default function TelaLogin({ icon }) {
                 />
                 <input
                     name="password"
-                    type="text"
+                    type="password"
                     placeholder="Senha"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

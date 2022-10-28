@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import "./modal.css"
 import axios from "axios"
@@ -7,8 +8,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Form({ abrirModal, info, modalIsOpen, setIsOpen }) {
     Modal.setAppElement("body");
-    const { token } = useContext(AuthContext)
+    const { token, user, setUser } = useContext(AuthContext)
     const header = { headers: { Authorization: `Bearer ${token}` } }  
+    const navigate = useNavigate()
     function fecharModal() {
         setIsOpen(false)
     }
@@ -19,6 +21,9 @@ export default function Form({ abrirModal, info, modalIsOpen, setIsOpen }) {
         post.then((ress) => {
             console.log('comprou')
             console.log(ress.data)
+            const novoUser = {...user, membership: ress.data.membership}
+            setUser(novoUser)
+            navigate('/home')
         })
         post.catch((err)=>{
             console.log('não comprou')
@@ -95,7 +100,7 @@ export default function Form({ abrirModal, info, modalIsOpen, setIsOpen }) {
                 className="modal"
             >
                 <p>Tem certeza que deseja assinar o plano Driven Plus (R$ 39,99)?</p>
-                <Escolha onClick={Enviar}>SIM</Escolha>
+                <Escolha type="submit" onClick={Enviar}>SIM</Escolha>
                 <Escolha onClick={fecharModal}>NÃO</Escolha>
                 <Fechar onClick={fecharModal}>x</Fechar>
                

@@ -12,7 +12,7 @@ export default function InfoPLano({ calendar, money, info, perks }) {
                 {perks.map((a, index) => {
                     return (
                         <ComponentBox key={index}>
-                            <p>{a.id}. {a.title}</p>
+                            <p>{index + 1}. {a.title}</p>
                         </ComponentBox>
                     )
                 })}

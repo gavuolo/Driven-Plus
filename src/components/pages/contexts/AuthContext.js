@@ -6,6 +6,7 @@ function AuthProvider({ children }) {
     const tokenLocalStorage = localStorage.getItem("userToken");
     const [user, setUser] = useState({})
     const [token, setToken] = useState(tokenLocalStorage);
+
         
     function addToken(token) {
         setToken(token)

@@ -1,29 +1,56 @@
 import styled from "styled-components"
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import axios from "axios";
 
 export default function TelaHome({ img }) {
+    const { user, token } = useContext(AuthContext)
+    const [perks, setPerks] = useState([])
+    const [imagem, setImagem] = useState([])
+    const header = { headers: { Authorization: `Bearer ${token}` } }  
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        setImagem(user.membership.image)
+        setPerks(user.membership.perks)
+    }, [perks])
+
+    function alterarPlano() {
+        navigate('/subscriptions')
+    }
+
+    function cancelarPlano() {
+        console.log('cancelar')
+        const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions'
+        const del = axios.delete(URL, header)
+        del.then((ress) => navigate("/subscriptions"))
+        del.catch((err) => alert(err.response.data.message))
+    }
+    
     return (
         <>
 
             <TopBar>
-                <img src={img} alt="icon" />
+                <img src={imagem} alt="DrivenPlus Plano" />
                 <Icon>
                     <ion-icon name="person-circle"></ion-icon>
                 </Icon>
             </TopBar>
             <Text>
-                <p>Olá, Fulano</p>
+                <p>Olá, {user.name}</p>
             </Text>
             <InfoPlano>
-                <button>Solicitar brindes</button>
-                <button>Solicitar brindes</button>
-                <button>Solicitar brindes</button>
-                <button>Solicitar brindes</button>
+                {perks.map((a, index) =>
+
+                    <button key={index}><a href={a.link} target="_blank">{a.title}</a></button>
+                )}
+
             </InfoPlano>
 
             <BottomBar>
-                <button>Solicitar brindes</button>
-                <button>Solicitar brindes</button> 
+                <button onClick={alterarPlano}>Mudar plano</button>
+                <button onClick={cancelarPlano}>Cancelar plano</button>
             </BottomBar>
         </>
     )
@@ -45,7 +72,6 @@ const Icon = styled.div`
         height: 40px;
         color: white;
     }
-
 `
 const Text = styled.div`
     display: flex;
@@ -72,6 +98,10 @@ const InfoPlano = styled.div`
         border-radius: 8px;
         font-weight: 700;
         cursor: pointer;
+    }
+    a{
+        color: #FFFFFF;
+        text-decoration: none;
     }
 `
 const BottomBar = styled.div`

@@ -4,19 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Plano({ planos }) {
     return (
         <>
-        {planos.map((a, index) =>
-        <Link to={`/subscriptions/${a.id}`} key={index}>
-            <BoxPlano>
-            <IconImg>
-                <img src={a.image} alt="img" />
-            </IconImg>
-            <Preco>
-                <p>R${a.price}</p>
-            </Preco>
-        </BoxPlano>
-        </Link>
-        )
-        }
+            {planos.map((a, index) =>
+                <Link to={`/subscriptions/${a.id}`} key={index}>
+                    <BoxPlano>
+                        <IconImg>
+                            <img src={a.image} alt="img" />
+                        </IconImg>
+                        <Preco>
+                            <p>R${a.price}</p>
+                        </Preco>
+                    </BoxPlano>
+                </Link>
+            )
+            }
         </>
     )
 }
