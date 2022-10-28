@@ -19,15 +19,13 @@ export default function Form({ abrirModal, info, modalIsOpen, setIsOpen }) {
         const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions'
         const post = axios.post(URL, form, header)
         post.then((ress) => {
-            console.log('comprou')
-            console.log(ress.data)
             const novoUser = {...user, membership: ress.data.membership}
             setUser(novoUser)
             navigate('/home')
         })
         post.catch((err)=>{
+            alert(err.response.data.message)
             console.log('não comprou')
-            console.log(err.response.data.message)
             console.log(form)
         })
     }
