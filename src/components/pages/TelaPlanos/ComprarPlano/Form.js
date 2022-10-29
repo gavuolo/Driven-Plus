@@ -97,7 +97,7 @@ export default function Form({ abrirModal, info, modalIsOpen, setIsOpen }) {
                 overlayClassName="modal-overlay"
                 className="modal"
             >
-                <p>Tem certeza que deseja assinar o plano Driven Plus (R$ 39,99)?</p>
+                <p>Tem certeza que deseja assinar o plano Driven Plus (R$ {info.price})?</p>
                 <Nao onClick={fecharModal}>NÃO</Nao>
                 <Sim type="submit" onClick={Enviar}>SIM</Sim>
                 <Fechar onClick={fecharModal}>x</Fechar>
